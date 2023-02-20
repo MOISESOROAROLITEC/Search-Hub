@@ -41,7 +41,7 @@ function repoBlockBottomInfos(language, licence, updateDate) {
 	<div class="licenceName"> ${licence} </div>
 	`
 	let date = `
-	<div class="updateDate">publié le ${dateLisible(updateDate)} </div>
+	<div class="updateDate"><i>publié le</i> ${dateLisible(updateDate)} </div>
 	`
 	if (language) dataReturned += lang;
 	if (licence) dataReturned += lic;
@@ -53,7 +53,7 @@ let countRepo
 let resultPerPage = 30;
 let page = 1;
 
-const token = "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";
+const token = "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";
 const searchUrl = "https://api.github.com/search/repositories";
 
 const headers = new Headers();
@@ -80,11 +80,6 @@ function countResultFind(event) {
 			countResultFindDiv.innerHTML = `${formatNumber(countRepo)} repository results`
 			break;
 	}
-	// if (!countRepo) {
-	// 	countResultFindDiv.innerHTML = "chargement des données ..."
-	// } else {
-	// 	countResultFindDiv.innerHTML = ` repository results`
-	// }
 }
 
 function getGithubData() {
@@ -96,8 +91,8 @@ function getGithubData() {
 			// Afficher les résultats de recherche
 			githubData = data
 			countRepo = data.total_count
-			console.log(data);
-			console.log(data.items);
+			console.log("data :", data);
+			console.log("data items :", data.items);
 			countResultFind()
 			let responseContent = document.querySelector(".responseContent")
 			data.items.forEach(item => {
