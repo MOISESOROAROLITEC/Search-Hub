@@ -1,5 +1,5 @@
 let header = `
-	<header onload="loading(event)">
+	<header>
 		<div class="headLogoBox" onclick="goHomePage(event)">
 			<img class="headWhiteLogo" src="./src/doc/white_searchhub.png" alt="logo Search hub du header">
 		</div>

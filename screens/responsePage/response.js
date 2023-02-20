@@ -3,7 +3,12 @@ let responsePage = `
 		<div class="responseCount"></div>
 		<section class="responseContent">
 		</section>
-		<div class="pagination">la pagination</div>
+		<div class="pagination">
+			<div class="numberCount"></div>
+			<div class="numberOption">
+				
+			</div>
+		</div>
 	</div>
 `
 function repositoryBlock(id, title, description,) {
@@ -57,7 +62,7 @@ const token = "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";
 const searchUrl = "https://api.github.com/search/repositories";
 
 const headers = new Headers();
-headers.append("Authorization", `Bearer ${token}`);
+// headers.append("Authorization", `Bearer ${token}`);
 
 let bodyContent = document.querySelector(".bodyContent")
 function encodeSearchTerm(sentence) {
@@ -85,7 +90,7 @@ function countResultFind(event) {
 function getGithubData() {
 	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=stars&order=desc`;
 	console.log("la queri composer est : ", query);
-	fetch(`${searchUrl}?${query}`, { headers })
+	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
 			// Afficher les résultats de recherche
@@ -132,3 +137,4 @@ function showResponsePage() {
 	getGithubData()
 	countResultFind()
 }
+// showResponsePage()

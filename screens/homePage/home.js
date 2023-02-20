@@ -31,6 +31,6 @@ function clickMagnify(event) {
 	getInputData()
 	// console.log(searchData);
 	// window.location.pathname = "/log" on change l'URL indiquée dans le navigateur :
-	// history.pushState({ path: this.path }, '', `response/${searchData}`);
+	// history.pushState({ path: this.path }, '', `./screens/responsePage/responsePage.html`);
 	showResponsePage()
 }
