@@ -1,0 +1,32 @@
+.footerContent {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background: #f6f6ff;
+	padding-top: 0px;
+}
+
+footer {
+	display: flex;
+	width: 70%;
+	margin: 0px auto;
+	border-top: solid 1px #727272;
+	padding: 7px 10px 10px 10px;
+	align-items: center;
+}
+
+.footerText {
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+	color: #727272;
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+footer img {
+	height: 31px;
+	max-width: 200px;
+	width: 50%;
+	min-width: 80px;
+}

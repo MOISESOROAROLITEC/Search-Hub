@@ -1,0 +1,64 @@
+header {
+	width: calc(100% - 100px);
+	height: 60px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background: #0E68EE;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 50px;
+	box-shadow: 0 -5px 20px #ccc;
+}
+
+.headWhiteLogo {
+	max-width: 200px;
+	width: 100%;
+}
+
+.headSearchBox {
+	display: flex;
+	align-items: center;
+}
+
+.headerSearchInput {
+	margin: 0 auto;
+	padding: 0 15px 0 40px;
+	max-width: 180px;
+	width: 100%;
+	height: 30px;
+	border: solid 0px #0E68EE;
+	border-radius: 50px;
+	outline-color: #0E68EE;
+	outline-style: auto;
+	outline-width: 1px;
+	font-size: 0.9rem;
+	color: white;
+	background: #0E68EE;
+}
+
+.leftHeadItem {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.headerSearchLogo {
+	width: 25px;
+	height: 25px;
+	margin: 0 -30px 1px 0px;
+	cursor: pointer;
+	border-radius: 50%;
+	z-index: 10;
+	background: white;
+	padding: 5px 3px 4px 5px;
+}
+
+.headFormInput {
+	width: 100%;
+}
+
+.headLogoBox {
+	cursor: pointer;
+}

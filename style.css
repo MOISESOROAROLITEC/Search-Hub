@@ -1,0 +1,40 @@
+@font-face {
+	font-family: montserrat;
+	src: url("./src/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #0000ff05;
+}
+
+div,
+header,
+footer {
+	transition: 100ms;
+	font-family: montserrat;
+}
+
+.bodyContent {
+	margin-top: 60px;
+	margin-bottom: 55px;
+	width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+	footer {
+		width: 100%;
+	}
+
+	header {
+		padding: 0 10px;
+		width: calc(100% - 20px);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.bodyContent {
+		margin-bottom: 90px;
+	}
+}
