@@ -4,10 +4,6 @@ let responsePage = `
 		<section class="responseContent">
 		</section>
 		<div class="pagination">
-			<div class="numberCount"></div>
-			<div class="numberOption">
-				
-			</div>
 		</div>
 	</div>
 `
@@ -34,7 +30,7 @@ let dataLoadError = `
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
-function repoBlockBottomInfos(language, licence, updateDate) {
+function repoBlockBottomInfos(language, licence, createdDate, updateDate) {
 	let dataReturned = "";
 	let lang = `
 	<div class="languageBlock">
@@ -45,13 +41,38 @@ function repoBlockBottomInfos(language, licence, updateDate) {
 	let lic = `
 	<div class="licenceName"> ${licence} </div>
 	`
-	let date = `
-	<div class="updateDate"><i>publié le</i> ${dateLisible(updateDate)} </div>
+	let created = `
+	<div class="updateDate"><i>créé le : </i> ${dateLisible(createdDate)} </div>
+	`
+	let update = `
+	<div class="updateDate"><i>mise à jour : </i> ${dateLisible(updateDate)} </div>
 	`
 	if (language) dataReturned += lang;
 	if (licence) dataReturned += lic;
-	if (updateDate) dataReturned += date;
+	if (createdDate) dataReturned += created
+	if (updateDate) dataReturned += update;
 	return dataReturned
+}
+function pagination(num) {
+
+	let paginationBlock = `
+		<div class="numberCount">
+			<div class="pagSpace Topleft"> << </div>
+			<div class="pagSpace Topleft"> < </div>
+			<div class="pagSpace numberCountNumber"></div>
+			<div class="pagSpace Topleft"> > </div>
+			<div class="pagSpace Topleft"> >> </div>
+		</div>
+		<div class="numberOption">
+			<select class="repoPagination" id="repoPagination" name="repoPagination">
+			<option value="au">1</option>
+			<option value="ca">2</option>
+			<option value="usa">3</option>
+			</select>
+		</div>
+	`
+	document.querySelector(".pagination").innerHTML = paginationBlock
+
 }
 let githubData
 let countRepo
@@ -93,31 +114,8 @@ function getGithubData() {
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
-			// Afficher les résultats de recherche
 			githubData = data
-			countRepo = data.total_count
-			console.log("data :", data);
-			console.log("data items :", data.items);
-			countResultFind()
-			let responseContent = document.querySelector(".responseContent")
-			data.items.forEach(item => {
-				responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description);
-				let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
-				console.log(bottomInfo);
-				console.log(item.topics.length != 0);
-				if (item.topics.length != 0) {
-					item.topics.forEach(topic => {
-						// console.log("le topic est : ", topic);
-						if (topic != null) {
-							document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
-						}
-					})
-				}
-				bottomInfo.innerHTML += repoBlockBottomInfos(item.language, item.license?.name, item.updated_at)
-			});
-			// data.items.topics.forEach(item => {
-			// 	responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description)
-			// });
+			showAnswer(data)
 		})
 		.catch(error => {
 			document.querySelector(".responseCount").innerHTML = "";
@@ -127,7 +125,29 @@ function getGithubData() {
 		});
 }
 function showAnswer(data) {
-
+	countRepo = data.total_count
+	console.log("data :", data);
+	console.log("data items :", data.items);
+	countResultFind()
+	let responseContent = document.querySelector(".responseContent")
+	data.items.forEach(item => {
+		responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description);
+		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
+		// console.log(bottomInfo);
+		// console.log(item.topics.length != 0);
+		if (item.topics.length != 0) {
+			item.topics.forEach(topic => {
+				// console.log("le topic est : ", topic);
+				if (topic != null) {
+					document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
+				}
+			})
+		}
+		bottomInfo.innerHTML += repoBlockBottomInfos(item.language, item.license?.name, item.created_at, item.updated_at)
+	});
+	let option = document.querySelector(".repoPagination")
+	console.log(option);
+	pagination(countRepo)
 }
 
 function showResponsePage() {
