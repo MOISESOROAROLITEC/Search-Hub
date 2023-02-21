@@ -12,14 +12,3 @@ function goHomePage() {
 	hideHeader()
 	document.querySelector('.bodyContent').innerHTML = homePage;
 }
-switch (window.location.pathname) {
-	case "/index.html":
-		showHomePage()
-		break;
-	case "/":
-		showHomePage()
-		break;
-	default:
-		showHomePage()
-		break;
-}
