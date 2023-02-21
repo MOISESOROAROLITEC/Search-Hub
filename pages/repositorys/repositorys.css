@@ -104,25 +104,33 @@
 	text-align: center;
 }
 
+.repoNotFind {
+	position: relative;
+	font-size: 1.7rem;
+	top: 20vh;
+	text-align: center;
+}
+
 /* ################ pagination ############### */
 .repoPagination {
 	width: 100%;
-	padding: 6px 16px;
+	padding: 5px 2px;
 	border: solid 2px #000000b5;
-	border-radius: 9px;
+	border-radius: 5px;
 	background-color: #f1f1f1;
 }
 
-.pagination {
+.paginationBox {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	margin: 10px;
-	padding: 10px;
+	margin: 10px 0;
+	padding: 10px 0;
 }
 
 .numberCount {
 	display: flex;
+	align-items: center;
 }
 
 .pagSpace {
@@ -137,10 +145,10 @@
 	align-items: center;
 	width: 30px;
 	height: 30px;
-	transition-duration: 1s;
+	/* transition-duration: 1s; */
 	transition-delay: 0s;
 	transition-property: all;
-	transition-timing-function: cubic-bezier(0, 0.61, 0.19, 0.74);
+	/* transition-timing-function: cubic-bezier(0, 0.61, 0.19, 0.74); */
 	cursor: pointer;
 }
 
@@ -149,6 +157,19 @@
 }
 
 .pagSpace:hover {
+	background: #e0e0e0;
+}
+
+.pagination {
+	display: flex;
+}
+
+.pagination .pagSpace {
+	padding: 0;
+	margin: 0 2px;
+}
+
+.activePage {
 	background: #e0e0e0;
 }
 

@@ -14,19 +14,29 @@
 <body>
 	<section class="headerContent">
 		<header>
-			<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_searchhub.png"
-				alt="logo Search hub du header">
+			<a href="/">
+				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_searchhub.png"
+					alt="logo Search hub du header">
+			</a>
+
 			<div class="leftHeadItem headSearchBox">
 				<img class="headerSearchLogo" title="cliquer pour valider la récherche" src="../../src/blue_magnify.png"
 					alt="logo de recherche" onclick="clickMagnify(event)">
-				<form action="/" class="headFormInput" onsubmit="submitRepoPage(event)">
-					<input class="headerSearchInput" type="text" name="search" autofocus="true">
+				<form action="./repositorys.html" class="headFormInput" onsubmit="submitRepoPage(event)">
+					<input class="headerSearchInput" type="text" name="search">
 				</form>
 			</div>
 		</header>
 	</section>
 
 	<section class="bodyContent">
+		<div class="responsePage">
+			<div class="responseCount"></div>
+			<section class="responseContent">
+			</section>
+			<div class="paginationBox">
+			</div>
+		</div>
 	</section>
 
 	<div class="footerContent">
