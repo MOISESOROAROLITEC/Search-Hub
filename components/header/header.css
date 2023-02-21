@@ -1,7 +1,7 @@
 header {
 	width: calc(100% - 100px);
 	height: 60px;
-	position: absolute;
+	position: fixed;
 	left: 0px;
 	top: 0px;
 	background: #0E68EE;
@@ -37,12 +37,17 @@ header {
 	color: white;
 	background: #0E68EE;
 	font-weight: 600;
+	transition: width 0.4s ease-in-out;
+}
+
+.headerSearchInput:focus {
+	/* width: 100%; */
 }
 
 .leftHeadItem {
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
+	/* width: 100%; */
 }
 
 .headerSearchLogo {
@@ -57,7 +62,7 @@ header {
 }
 
 .headFormInput {
-	width: 100%;
+	/* width: 100%; */
 }
 
 .headLogoBox {
