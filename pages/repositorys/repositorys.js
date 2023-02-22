@@ -39,7 +39,7 @@ function repositoryBlock(id, title, description,) {
 		<div class="repoBlock" id="${id}">
 			<div class="repoTitleBlock">
 				<img src="../../src/doc/book_mark.png">
-				<a href="../repository/repository.html?username=${title.split("/")[0]}&repo=${title.split("/")[1]}" class="title">${title}</a>
+				<a href="../files/files.html?username=${title.split("/")[0]}&repo=${title.split("/")[1]}" class="title">${title}</a>
 			</div>
 			<div class="description"> ${description} </div>
 			<div class="topics"></div>
