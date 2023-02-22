@@ -102,9 +102,9 @@ function pagination(num) {
 	}
 	let paginationBlock = `
 		<div class="numberCount">
-			<div class="pagSpace pagineLeft" onclick="pagineLeft()"> < </div>
+			<button class="pagSpace pagineLeft" onclick="pagineLeft()"> < </div>
 			<div class="pagination"></div>
-			<div class="pagSpace pagineRight" onclick="pagineRight()"> > </div>
+			<button class="pagSpace pagineRight" onclick="pagineRight()"> > </button>
 		</div>
 		<div class="numberOption">
 			<select onchange="updateresultPerPage(event)" class="repoPagination" id="repoPagination" name="repoPagination">
@@ -113,7 +113,7 @@ function pagination(num) {
 	`;
 	document.querySelector(".paginationBox").innerHTML = paginationBlock;
 	let select = document.querySelector(".repoPagination");
-	[10, 30, 50, 100, 150].forEach(nbr => {
+	[10, 30, 50, 75, 100].forEach(nbr => {
 		if (nbr == resultPerPage) {
 			select.innerHTML += option(nbr, "selected")
 		} else {
@@ -133,10 +133,10 @@ function pagination(num) {
 			paginationNbr.innerHTML += `<div class="pagSpace" onclick="goPage(${i})" >${i}</div> `
 		}
 	}
-	// if (page == 1)
-	// 	document.querySelector(".pagineLeft").remove();
-	// if (page == nbrPage)
-	// 	document.querySelector(".pagineRight").remove();
+	if (page == 1)
+		document.querySelector(".pagineLeft").disabled = true;
+	if (page == nbrPage)
+		document.querySelector(".pagineRight").disabled = true;
 }
 
 
@@ -203,7 +203,6 @@ function showAnswer(data) {
 		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
 		if (item.topics.length != 0) {
 			item.topics.forEach(topic => {
-				// console.log("le topic est : ", topic);
 				if (topic != null) {
 					document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
 				}
