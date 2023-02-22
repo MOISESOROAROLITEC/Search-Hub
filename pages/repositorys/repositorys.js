@@ -39,7 +39,7 @@ function repositoryBlock(id, title, description,) {
 		<div class="repoBlock" id="${id}">
 			<div class="repoTitleBlock">
 				<img src="../../src/doc/book_mark.png">
-				<div class="title">${title}</div>
+				<a href="../repository/repository.html?username=${title.split("/")[0]}&repo=${title.split("/")[1]}" class="title">${title}</a>
 			</div>
 			<div class="description"> ${description} </div>
 			<div class="topics"></div>
@@ -198,6 +198,8 @@ function showAnswer(data) {
 	document.querySelector(".dataLoading").remove()
 	data.items.forEach(item => {
 		responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description);
+		console.log();
+		document.getElementById(`${item.id}`).addEventListener("click", () => console.log("lol"))
 		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
 		if (item.topics.length != 0) {
 			item.topics.forEach(topic => {
@@ -210,16 +212,12 @@ function showAnswer(data) {
 		if (bottomInfo)
 			bottomInfo.innerHTML += repoBlockBottomInfos(item.language, item.license?.name, item.created_at, item.updated_at)
 	});
-	// let option = document.querySelector(".repoPagination")
-	// console.log(option);
-	if (countRepo)
+	if (countRepo) {
 		pagination(countRepo)
+	}
 }
 
 function showResponsePage() {
-	console.log("show rep");
-	// showHeader()
-	// bodyContent.innerHTML = responsePage;
 	document.querySelector(".responseCount").style.color = "#1122ff"
 	headerSearchInput.value = searchData;
 	getGithubData()

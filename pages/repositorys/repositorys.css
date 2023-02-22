@@ -23,10 +23,17 @@
 .languageBlock {
 	display: flex;
 	align-items: center;
-	color: #6b6b6b;
+	color: #000000ba;
 	font-size: 14px;
 }
 
+/* .repoTitleBlock {
+	text-decoration: none;
+}
+
+.repoTitleBlock:hover {}
+
+*/
 .bottomInfo {
 	display: flex;
 	flex-wrap: wrap;
@@ -56,6 +63,13 @@
 	line-height: 24px;
 	font-size: 16px;
 	color: #000000ba;
+	text-decoration: none;
+}
+
+.title:hover {
+	text-decoration: underline;
+	color: #0e68ee;
+	text-decoration-color: #0E68EE;
 }
 
 .dataLoadError {
