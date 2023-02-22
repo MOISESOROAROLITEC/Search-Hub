@@ -1,0 +1,95 @@
+.responsePage {
+	padding: 30px 0 30px 0;
+	margin: 0 auto;
+	width: 70%;
+}
+
+.repoNameBlock {
+	display: flex;
+	align-items: center;
+	margin: 0px 0px 30px;
+}
+
+.bookMark {
+	width: 15px;
+	height: 20px;
+	margin: 0 6px 0 0;
+}
+
+.repoName {
+	font-size: 17px;
+	font-family: 'montserrat';
+	letter-spacing: 3px;
+	margin: -2px 0 0 0;
+	text-decoration: none;
+	font-weight: 500;
+	color: #000000db;
+}
+
+.repoType {
+	background: #0E68EE;
+	border-radius: 10px;
+	padding: 1px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 -1px 8px;
+	color: white;
+	font-weight: 700;
+}
+
+.filesBlock {
+	border: solid 1px #C0C0C0;
+	border-radius: 4px;
+}
+
+.userBlock {
+	display: flex;
+	align-items: center;
+	margin: 7px;
+	font-weight: 600;
+}
+
+.avatar {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	margin: 0 10px 0 0;
+}
+
+.fileBlock {
+	display: flex;
+	align-items: center;
+	margin: 10px 15px;
+}
+
+.iconNameBlock {
+	display: flex;
+	align-items: center;
+}
+
+.iconFile {
+	margin: 0 10px 0 0;
+	width: 25px;
+	height: 30px;
+	color: red;
+}
+
+.separator {
+	width: 100%;
+	height: 1px;
+	border: none;
+	background: #C0C0C0;
+}
+
+@media screen and (max-width: 800px) {
+	.responsePage {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.responsePage {
+		width: calc(100% - 20px);
+	}
+}
