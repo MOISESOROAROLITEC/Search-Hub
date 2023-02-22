@@ -8,9 +8,9 @@
 
 footer {
 	display: flex;
-	width: 70%;
+	width: 80%;
 	margin: 0px auto;
-	border-top: solid 1px #727272;
+	border-top: solid 1px #d0d0d0;
 	padding: 7px 10px 10px 10px;
 	align-items: center;
 }
