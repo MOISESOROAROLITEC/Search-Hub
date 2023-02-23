@@ -172,7 +172,7 @@ function countResultFind(event) {
 }
 
 function getGithubData() {
-	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=stars&order=desc`;
+	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`;
 	// console.log("la queri composer est : ", query);
 	responseContent = document.querySelector(".responseContent")
 	responseContent.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
