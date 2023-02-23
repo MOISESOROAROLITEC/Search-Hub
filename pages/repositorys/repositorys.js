@@ -173,33 +173,33 @@ function countResultFind(event) {
 
 function getGithubData() {
 	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`;
-	// console.log("la queri composer est : ", query);
+	// console.log(`la queri composer est : ${searchUrl}?${query}`);
 	responseContent = document.querySelector(".responseContent")
 	responseContent.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
 			githubData = data
-			console.log(data);
+			// console.log(data);
 			showAnswer(data)
 		})
 		.catch(error => {
 			document.querySelector(".responseCount").innerHTML = "";
 			document.querySelector(".paginationBox").innerHTML = "";
 			responseContent.innerHTML = dataLoadError();
-			console.error("l'erreur est : ", error)
+			// console.error("l'erreur est : ", error)
 		});
 }
 function showAnswer(data) {
 	countRepo = data.total_count
-	console.log("data :", data);
-	console.log("data items :", data.items);
+	// console.log("data :", data);
+	// console.log("data items :", data.items);
 	countResultFind()
 	document.querySelector(".dataLoading").remove()
 	data.items.forEach(item => {
 		responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description);
-		console.log();
-		document.getElementById(`${item.id}`).addEventListener("click", () => console.log("lol"))
+		// console.log();
+		// document.getElementById(`${item.id}`).addEventListener("click", () => console.log("lol"))
 		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
 		if (item.topics.length != 0) {
 			item.topics.forEach(topic => {
