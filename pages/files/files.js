@@ -2,6 +2,7 @@ let headerSearchInput = document.querySelector(".headerSearchInput");
 let urlParams = new URLSearchParams(window.location.search);
 let username = urlParams.get("username");
 let reposName = urlParams.get("repo");
+window.titl
 
 
 function updatePage(search = "", page = "") {
@@ -17,24 +18,30 @@ function dataLoadError(errorMessage) {
 	if (errorMessage == "Not Found") {
 		returned = `
 			<div class="dataLoadError">
-			<p>
-				Erreur de traitement des données.
-				</p>
+				<div class="errorMessage">Erreur de traitement des données.</div>
+				<div class="errBtn">
+					<a href="#" class="errorButton retry" title="récharger la page">réésayez</a>
+					<a href="../../index.html" class="errorButton retry" title="allez à la page d'accueil">page d'accueil</a>
+				</div>
 			</div>`;
 	} else if (errorMessage === "This repository is empty.") {
 		returned = `
 			<div class="dataLoadError">
-			<p>
-				Ce repository est vide
-				</p>
+				<div class="errorMessage">Ce repos est vide</div>
+				<div class="errBtn">
+					<a href="#" class="errorButton retry" title="récharger la page">réésayez</a>
+					<a href="../../index.html" class="errorButton retry" title="allez à la page d'accueil">page d'accueil</a>
+				</div>
 			</div>`
 	} else {
 		returned = `
 			<div class="dataLoadError">
-			<p>
-				Erreur de chargement des données.<br><br>
-				Connectez vous à internet et réesayez.
-				</p>
+				<div class="errorMessage">Erreur de chargement des données.
+				Connectez vous à internet et réesayez.</div>
+				<div class="errBtn">
+					<a href="#" class="errorButton retry" title="récharger la page">réésayez</a>
+					<a href="../../index.html" class="errorButton retry" title="allez à la page d'accueil">page d'accueil</a>
+				</div>
 			</div>`
 	}
 	return returned;
@@ -48,8 +55,8 @@ function clickMagnify(event) {
 }
 function repoNameBlock() {
 	return `
-		<img class="bookMark" src="/src/doc/book_mark.png" alt="book_mark">
-		<a href="" class="repoName">${username}/${reposName}</a>
+		<img class="bookMark" src="../../src/doc/book_mark.png" alt="book_mark">
+		<div class="repoName"><a href="../userRepo/userRepo.html" class="username" title="voir les repos de ${username}">${username}</a>/${reposName}</div>
 		<div class="repoType">public</div>
 	`
 }
@@ -59,16 +66,30 @@ function userBlock() {
 	return `
 		<div class="userBlock">
 			<img class="avatar" src="https://avatars.githubusercontent.com/${username}" alt="Avatar de l'utilisateur octocat">
-			<div class="username">${username}</div>
+			<a href="../userRepo/userRepo.html" class="username" title="voir les repos de ${username}">${username}</a>
 		</div>
 	`
 }
-function fileBlock(name, type, desc = "", date = "") {
+function formatSize(sizeInBytes) {
+	const units = ["octets", "ko", "Mo", "Go"];
+	let size = sizeInBytes;
+	let unitIndex = 0;
+	while (size >= 1024 && unitIndex < units.length - 1) {
+		size /= 1024;
+		unitIndex++;
+	}
+	return `${Math.round(size * 100) / 100} ${units[unitIndex]}`;
+}
+function fileBlock(name, type, size = "") {
 	let fileType
+	let fileSize = ""
 	if (type == "file") {
 		fileType = "file.svg"
 	} else {
 		fileType = "folder.svg"
+	}
+	if (size != 0) {
+		fileSize = formatSize(size)
 	}
 	return `
 	<div class="fileBlock">
@@ -76,8 +97,7 @@ function fileBlock(name, type, desc = "", date = "") {
 			<img src="../../src/doc/${fileType}" alt="icon du fichier" class="iconFile">
 			<div class="fileName">${name}</div>
 		</div>
-		<div class="desc">${desc}</div>
-		<div class="date">${date}</div>
+		<div class="fileSize">${fileSize}</div>
 	</div>
 	`
 }
@@ -105,7 +125,7 @@ function getGithubData() {
 			showAnswer(data)
 		})
 		.catch(error => {
-			filesBlock.innerHTML = dataLoadError(error.message);
+			document.querySelector(".responsePage").innerHTML = dataLoadError(error.message);
 			console.error("l'erreur est : ", error.message)
 		});
 }
@@ -121,14 +141,12 @@ function showAnswer(data) {
 	// countResultFind()
 	document.querySelector(".dataLoading").remove()
 	filesBlock.innerHTML = userBlock()
-	let datalong = data.length
-	data.forEach((item, index) => {
-		console.log("les data sont :", index);
-		// if (index == 0) {
-		filesBlock.innerHTML += hr() + fileBlock(item.name, item.type)
-		// }
-
-		// fileBlock.innerHTML += hr();
+	let dir = data.filter(el => el.type == "dir");
+	let file = data.filter(el => el.type == "file");
+	let dataSorted = [...dir, ...file]
+	dataSorted.forEach((item, index) => {
+		// console.log("les data sont :", index);
+		filesBlock.innerHTML += hr() + fileBlock(item.name, item.type, item.size);
 	})
 }
 

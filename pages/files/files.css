@@ -22,7 +22,6 @@
 	letter-spacing: 3px;
 	margin: -2px 0 0 0;
 	text-decoration: none;
-	font-weight: 500;
 	color: #000000db;
 }
 
@@ -46,7 +45,7 @@
 .userBlock {
 	display: flex;
 	align-items: center;
-	margin: 7px;
+	margin: 8px 7px;
 	font-weight: 600;
 }
 
@@ -57,9 +56,21 @@
 	margin: 0 10px 0 0;
 }
 
+.username {
+	color: black;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.username:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
 .fileBlock {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	margin: 10px 15px;
 }
 
@@ -80,6 +91,47 @@
 	height: 1px;
 	border: none;
 	background: #C0C0C0;
+}
+
+.dataLoadError {
+	position: relative;
+	top: 15vh;
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	display: grid;
+}
+
+.errorMessage {
+	margin: 0 0 41px 0;
+	color: #ff0000d9;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.errorButton {
+	text-decoration: none;
+	background: #d8d8d8;
+	padding: 8px 14px;
+	border-radius: 10px;
+	font-weight: 500;
+	/* margin: 45px; */
+	color: black;
+}
+
+.errorButton:hover {
+	text-decoration: underline;
+	background: #c2c2c2;
+	color: blue;
+}
+
+.errorButton:active {
+	background: #a4a4a4;
+}
+
+.errBtn {
+	display: flex;
+	justify-content: space-around;
 }
 
 @media screen and (max-width: 800px) {
