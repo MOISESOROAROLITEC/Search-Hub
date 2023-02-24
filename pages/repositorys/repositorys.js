@@ -6,9 +6,6 @@ let resultPerPage = localStorage.getItem("resultPerPage") || 30;
 let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
 
-let responsePage = `
-
-`;
 function updatePage(search = "", page = "") {
 	if (!search)
 		search = searchData;
@@ -17,8 +14,6 @@ function updatePage(search = "", page = "") {
 	window.location.href = `repositorys.html?search=${search}` + page
 }
 function updateresultPerPage(event) {
-	// console.log(event.target);
-	// console.log(event.target.value);
 	localStorage.setItem("resultPerPage", event.target.value)
 	updatePage()
 }
@@ -41,31 +36,12 @@ function repositoryBlock(id, title, description,) {
 				<img src="../../src/doc/book_mark.png">
 				<a href="../files/files.html?username=${title.split("/")[0]}&repo=${title.split("/")[1]}" class="title">${title}</a>
 			</div>
-			<div class="description"> ${description} </div>
+			<div class="description"> ${description || ""} </div>
 			<div class="topics"></div>
 			<div class="bottomInfo">  </div>
 		</div>
 `}
-function dataLoadError() {
-	let returned = ""
-	if (githubData) {
-		returned = `
-			<div class="dataLoadError">
-			<p>
-				Erreur de traitement des données.
-				</p>
-			</div>`;
-	} else {
-		returned = `
-			<div class="dataLoadError">
-			<p>
-				Erreur de chargement des données.<br><br>
-				Connectez vous à internet et réesayez.
-				</p>
-			</div>`
-	}
-	return returned;
-}
+
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
@@ -114,6 +90,7 @@ function pagination(num) {
 	document.querySelector(".paginationBox").innerHTML = paginationBlock;
 	let select = document.querySelector(".repoPagination");
 	[10, 30, 50, 75, 100].forEach(nbr => {
+		console.log("je suis dans la boucle for de range");
 		if (nbr == resultPerPage) {
 			select.innerHTML += option(nbr, "selected")
 		} else {
@@ -123,10 +100,13 @@ function pagination(num) {
 	// console.dir(select)
 	let paginationNbr = document.querySelector(".pagination")
 	let nbrPage = (countRepo / resultPerPage).toFixed()
-	// let activePage = "activePage"
 	if (nbrPage > 10)
 		nbrPage = 10;
+	// let deb = page - 3 <= 0 ? 1 : page - 3
+	// let fin = page + 3 > nbrPage ? page + 3 : nbrPage
+
 	for (let i = 1; i <= nbrPage; i++) {
+		console.log("je suis dans la boucle for i i++");
 		if (i == page) {
 			paginationNbr.innerHTML += `<div class="pagSpace activePage" >${i}</div> `
 		} else {
@@ -178,17 +158,10 @@ function getGithubData() {
 	responseContent.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
-		.then(data => {
-			githubData = data
-			// console.log(data);
-			showAnswer(data)
-		})
+		.then(data => { showAnswer(data) })
 		.catch(error => {
-			document.querySelector(".responseCount").innerHTML = "";
-			document.querySelector(".paginationBox").innerHTML = "";
-			responseContent.innerHTML = dataLoadError();
-			// console.error("l'erreur est : ", error)
-		});
+			dataLoadError();
+		})
 }
 function showAnswer(data) {
 	countRepo = data.total_count
@@ -198,18 +171,16 @@ function showAnswer(data) {
 	document.querySelector(".dataLoading").remove()
 	data.items.forEach(item => {
 		responseContent.innerHTML += repositoryBlock(item.id, item.full_name, item.description);
-		// console.log();
-		// document.getElementById(`${item.id}`).addEventListener("click", () => console.log("lol"))
 		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
 		if (item.topics.length != 0) {
 			item.topics.forEach(topic => {
 				if (topic != null) {
-					document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
+					document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic);
 				}
 			})
 		}
 		if (bottomInfo)
-			bottomInfo.innerHTML += repoBlockBottomInfos(item.language, item.license?.name, item.created_at, item.updated_at)
+			bottomInfo.innerHTML += repoBlockBottomInfos(item.language, item.license?.name, item.created_at, item.updated_at);
 	});
 	if (countRepo) {
 		pagination(countRepo)

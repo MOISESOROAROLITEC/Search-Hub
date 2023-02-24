@@ -3,11 +3,55 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+	<link rel="stylesheet" href="./userRepo.css">
+	<link rel="stylesheet" href="../../components/header/header.css">
+	<link rel="stylesheet" href="../../components/footer/footer.css">
+	<link rel="stylesheet" href="../../style.css">
+	<link rel="icon" href="../../src/ongletImage.jpeg">
 	<title>user repositories</title>
 </head>
 
 <body>
-	<h1>le h1 de la page</h1>
+	<section class="headerContent">
+		<header>
+			<a href="../../index.html">
+				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_logo.svg"
+					alt="logo Search hub du header">
+			</a>
+			<div class="leftHeadItem headSearchBox">
+				<img class="headerSearchLogo" title="cliquer pour valider la récherche" src="../../src/blue_magnify.png"
+					alt="logo de recherche" onclick="clickMagnify(event)">
+				<form action="../repositorys/repositorys.html" class="headFormInput" onsubmit="submitRepoPage(event)">
+					<input class="headerSearchInput" type="text" name="search">
+				</form>
+			</div>
+		</header>
+	</section>
+	<section class="bodyContent">
+		<div class="responsePage">
+			<div class="userBox">
+			</div>
+			<div class="line">
+				<div class="repotext">
+					<img class="repotextImg" src="../../src/doc/book_mark.png" alt="">
+					<div class="text">Repositories</div>
+				</div>
+				<div class="repoLine"></div>
+			</div>
+			<div class="repoBox"></div>
+			<div class="paginationBox"></div>
+		</div>
+	</section>
+
+	<div class="footerContent">
+		<footer class="footer">
+			<img src="../../src/doc/white_searchhub.png" alt="plateforme white logo" width="200px">
+			<div class="footerText">© 2023 Search Hub, Inc.</div>
+		</footer>
+	</div>
 </body>
+<script src="./userRepo.js"></script>
+<script src="../../script.js"></script>
 
 </html>
