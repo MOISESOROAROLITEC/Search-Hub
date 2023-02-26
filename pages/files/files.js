@@ -2,8 +2,6 @@ let headerSearchInput = document.querySelector(".headerSearchInput");
 let urlParams = new URLSearchParams(window.location.search);
 let username = urlParams.get("username");
 let reposName = urlParams.get("repo");
-window.titl
-
 
 function updatePage(search = "", page = "") {
 	// if (!search)
@@ -84,16 +82,15 @@ function formatNumber(num) {
 }
 function getGithubData() {
 	filesBlock.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
-	try {
-		fetch(getUrl())
-			.then(response => response.json())
-			.then(data => {
-				showAnswer(data)
-			})
-	} catch (error) {
-		console.log("l'erreur est : ", error);
-		dataLoadError();
-	}
+	fetch(getUrl())
+		.then(response => response.json())
+		.then(data => {
+			showAnswer(data)
+		})
+		.catch(error => {
+			console.log("l'erreur est : ", error);
+			dataLoadError();
+		})
 }
 function hr() {
 	return `
@@ -103,21 +100,26 @@ function hr() {
 function showAnswer(data) {
 	// countRepo = data.total_count
 	console.log("data :", data);
-	console.log("data items :", data.items);
+	// console.log("data items :", data.items);
 	// countResultFind()
 	document.querySelector(".dataLoading").remove()
 	filesBlock.innerHTML = userBlock()
-	let dir = data.filter(el => el.type == "dir");
-	let file = data.filter(el => el.type == "file");
-	let dataSorted = [...dir, ...file]
-	dataSorted.forEach((item) => {
-		// console.log("les data sont :", index);
-		filesBlock.innerHTML += hr() + fileBlock(item.name, item.type, item.size);
-	})
+	if (!data.length) {
+		// console.log("le repo est vide");
+		document.querySelector(".filesBlock").innerHTML += hr() + `<div class="fileBlock" style="text-align: center; display: block;">Ce repositorie est vide</div>`
+	} else {
+		let dir = data.filter(el => el.type == "dir");
+		let file = data.filter(el => el.type == "file");
+		let dataSorted = [...dir, ...file]
+		dataSorted.forEach((item) => {
+			// console.log("les data sont :", index);
+			filesBlock.innerHTML += hr() + fileBlock(item.name, item.type, item.size);
+		})
+	}
 }
 
 function showResponsePage() {
-	console.log("show rep");
+	// console.log("show rep");
 	getGithubData()
 }
 showResponsePage();
