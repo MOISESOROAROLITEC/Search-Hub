@@ -27,6 +27,8 @@
 
 .homePage form {
 	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .searchInputBox {
@@ -49,16 +51,31 @@
 	color: #000000ab;
 }
 
-.searchLogoMagnify {
+.searchLogoMagnif {
+	background: none;
+	border: none;
 	width: 50px;
 	height: 50px;
 	margin: 0 0 0 -66px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+.searchIcon {
 	color: #0E68EE;
 	cursor: pointer;
 	font-size: 40px;
 	font-weight: bold;
 	display: flex;
 	align-items: center;
+	transition: 200ms;
+}
+
+.searchIcon:hover {
+	color: #0754c5;
+	font-size: 45px;
+	margin: -4px 0 0 -4px;
 }
 
 /* .searchLogoMagnify {

@@ -23,10 +23,12 @@
 				</div>
 				<div class="searchInputBox">
 					<form action="./pages/repositorys/repositorys.html" onsubmit="submitHomePage(event)">
-						<input class="searchInput" type="text" name="search" autofocus="true">
+						<input required class="searchInput" type="text" name="search" autofocus="true">
+						<button type="submit" class="searchLogoMagnif">
+							<i class="fa fa-search searchIcon" aria-hidden="true" title="cliquer pour valider la récherche"></i>
+						</button>
 					</form>
-					<i class="fa fa-search searchLogoMagnify" aria-hidden="true" title="cliquer pour valider la récherche"
-						onclick="clickMagnify(event)"></i>
+
 				</div>
 				<div class="infoText">
 					Utilisateurs Github, les repositories Github et la recherche de code.

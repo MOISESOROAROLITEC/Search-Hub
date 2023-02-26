@@ -13,12 +13,12 @@ function goHomePage() {
 	hideHeader()
 	document.querySelector('.bodyContent').innerHTML = homePage;
 }
-function dataLoadError() {
+function dataLoadError(message) {
 	let responsePage = document.querySelector(".responsePage")
 	let returned = `
 			<div class="dataLoadError">
-				<div class="errorMessage">Erreur de chargement des données.
-				Connectez vous à internet et réessayez.</div>
+				<div class="errorMessage">${message || "Erreur de chargement des données. Connectez vous à internet et réessayez."}
+				</div>
 				<div class="errBtn">
 					<a href="${window.location.href}" class="errorButton retry" title="récharger la page">
 						réessayez
