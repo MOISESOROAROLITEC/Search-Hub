@@ -152,15 +152,15 @@ function getUserInfo() {
 	fetch(`${userInfoUrl}${username}`)
 		.then(response => response.json())
 		.then(data => {
-			// console.log(data);
+			console.log(data.length);
 			// document.querySelector(".dataLoading").innerHTML = ""
-			userData = true;
+			userData = data.length
 			userBoxDoc.innerHTML = userBox(data);
 			// showAnswer(data)
 		})
 		.catch(error => {
 			// document.querySelector(".paginationBox").innerHTML = "";
-			dataLoadError();
+			dataLoadError(userData ? null : "aucun utilisateur ne correcpond a ce nom");
 			// document.querySelector(".retry").addEventListener("click", updatePage())
 			console.error("l'erreur est : ", error)
 		});
@@ -181,23 +181,28 @@ function getUserRepos() {
 		})
 		.catch(error => {
 			// document.querySelector(".paginationBox").innerHTML = "";
+			// dataLoadError(userData ? null : "aucun utilisateur ne correcpond a ce nom");
 			console.error("l'erreur est : ", error)
 		});
 }
 
 function showUserRepos(data) {
-	// console.log("data :", data);
-	data.forEach(item => {
-		repoBox.innerHTML += repositoryBlock(item.id, item.name, item.description, item.language, item.updated_at);
-		let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
-		if (item.topics.length != 0) {
-			item.topics.forEach(topic => {
-				if (topic != null) {
-					document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
-				}
-			})
-		}
-	});
+	console.log("data :", data.length);
+	if (data.length == 0) {
+		document.querySelector(".repoBox").innerHTML += `<div class="emptyRepo">Ce utilisateur n'a pas de repositorie</div>`
+	} else {
+		data.forEach(item => {
+			repoBox.innerHTML += repositoryBlock(item.id, item.name, item.description, item.language, item.updated_at);
+			let bottomInfo = document.getElementById(`${item.id}`).querySelector(".bottomInfo");
+			if (item.topics.length != 0) {
+				item.topics.forEach(topic => {
+					if (topic != null) {
+						document.getElementById(`${item.id}`).querySelector(".topics").innerHTML += topicsChips(topic)
+					}
+				})
+			}
+		});
+	}
 }
 
 getUserInfo()
