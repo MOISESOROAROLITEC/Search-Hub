@@ -101,7 +101,7 @@
 }
 
 .repoBlock:hover {
-	background: #0000ff0a;
+	background: #0000ff0f;
 }
 
 .responseContent {
@@ -166,14 +166,6 @@
 	text-decoration-color: #0E68EE;
 }
 
-.dataLoadError {
-	font-size: 2.0rem;
-	text-align: center;
-	color: #ff00008c;
-	position: relative;
-	top: 15vh;
-}
-
 .description {
 	white-space: nowrap;
 	overflow: hidden;
@@ -217,4 +209,10 @@
 	font-size: 1.7rem;
 	top: 20vh;
 	text-align: center;
+}
+
+.emptyRepo {
+	font-size: 22px;
+	text-align: center;
+	margin: 0px 0 0 0;
 }
