@@ -2,14 +2,37 @@ let responseData
 let countRepo
 let headerSearchInput = document.querySelector(".headerSearchInput");
 let urlParams = new URLSearchParams(window.location.search);
-let resultPerPage = localStorage.getItem("resultPerPage") || 30;
+let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
 let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
+let formatEnd
+// console.log(page);
 
-if (page > 10 & resultPerPage == 100) {
-	page = 10
-	window.history.pushState(null, "lol", window.location.href.slice(0, -2) + page)
+function formatPageNumber() {
+	let urlFormated
+	if (isNaN(page)) {
+		page = 1
+		let url = window.location.href;
+		let pos = url.indexOf("&")
+		// console.log("la position : ", pos);
+		urlFormated = url.slice(0, pos) + `&page=${page}`
+		window.history.pushState(null, "lol", urlFormated);
+	}
+	// console.log("la page est 1 : ", page);
+	if ((resultPerPage * page) > 1000) {
+		page = (1000 / resultPerPage).toFixed();
+		formatEnd = page
+		let url = window.location.href;
+		let pos = url.indexOf("&")
+		// console.log("la position : ", pos);
+		urlFormated = url.slice(0, pos) + `&page=${page}`
+		window.history.pushState(null, "lol", urlFormated);
+	}
+	// console.log("la page est : ", page);
+	// console.log("l'ur est : ", urlFormated);
 }
+formatPageNumber()
+
 
 function updatePage(search = "", page = "") {
 	if (!search)
@@ -95,7 +118,7 @@ function pagination(num) {
 	document.querySelector(".paginationBox").innerHTML = paginationBlock;
 	let select = document.querySelector(".repoPagination");
 	[10, 30, 50, 75, 100].forEach(nbr => {
-		console.log("je suis dans la boucle for de range");
+		// console.log("je suis dans la boucle for de range");
 		if (nbr == resultPerPage) {
 			select.innerHTML += option(nbr, "selected")
 		} else {
@@ -105,32 +128,38 @@ function pagination(num) {
 	// console.dir(select)
 	let paginationNbr = document.querySelector(".pagination")
 	let nbrPage = (countRepo / resultPerPage).toFixed()
-	if (resultPerPage * nbrPage > 1000)
-		nbrPage = 1000 / resultPerPage
-	console.log("nbr de page est :", nbrPage);
+	// if (resultPerPage * nbrPage > 1000)
+	// 	nbrPage = (1000 / resultPerPage).toFixed()
+	// console.log("nbr de page est :", nbrPage);
 
-	let deb = Number(page) - 5
+	let deb = Number(page) - 5;
 	if (deb < 1)
-		deb = 1
+		deb = 1;
 
-	let fin = Number(page) + 5
+	let fin = Number(page) + 5;
 	if (fin > nbrPage)
-		fin = nbrPage
+		fin = nbrPage;
+
 	if (nbrPage < 10)
-		deb = 1
+		deb = 1;
+
 	if (deb == 1)
 		if (nbrPage > 10)
-			fin = 10
+			fin = 10;
 		else {
-			fin = nbrPage
+			fin = nbrPage;
 			// deb = page - 10
 		}
+	if (formatEnd) {
+		fin = formatEnd
+		// console.log("fend");
+	}
 
-	console.log("le debut est : ", deb);
-	console.log("le fin est : ", fin);
+	// console.log("le debut est : ", deb);
+	// console.log("le fin est : ", fin);
 
 	for (let i = deb; i <= fin; i++) {
-		console.log("je suis dans la boucle for i i++");
+		// console.log("je suis dans la boucle for i i++");
 		if (i == page) {
 			paginationNbr.innerHTML += `<div class="pagSpace activePage" >${i}</div> `
 		} else {
@@ -193,11 +222,11 @@ function getGithubData() {
 		.then(response => response.json())
 		.then(data => {
 			responseData = data?.items
-			console.log(responseData);
+			// console.log(responseData);
 			showAnswer(data)
 		})
 		.catch(error => {
-			console.log("l'erreur est :", error);
+			// console.log("l'erreur est :", error);
 			dataLoadError(!responseData ? null : "Erreur de traitement des données");
 		})
 }
