@@ -7,7 +7,8 @@ body {
 	margin: 0;
 	padding: 0;
 	/* background: #393939; */
-	background: white;
+	/* background: white; */
+
 }
 
 div,
@@ -21,6 +22,7 @@ footer {
 	margin-top: 60px;
 	margin-bottom: 55px;
 	width: 100%;
+	/* background: url("./src/view\ \(1\).jpeg"); */
 }
 
 /* ##################### Error ######################*/

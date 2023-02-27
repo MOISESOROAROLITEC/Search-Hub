@@ -4,6 +4,11 @@
 	width: 100%;
 	background: #f6f6ff;
 	padding-top: 0px;
+	background-image: url(../../src/view\ \(1\).jpeg);
+	background-repeat: repeat-x;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: overlay;
 }
 
 footer {
@@ -13,6 +18,8 @@ footer {
 	border-top: solid 1px #d0d0d0;
 	padding: 7px 10px 10px 10px;
 	align-items: center;
+	background: white;
+	opacity: 76%;
 }
 
 .footerText {
