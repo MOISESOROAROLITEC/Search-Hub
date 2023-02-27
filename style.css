@@ -73,6 +73,19 @@ footer {
 	justify-content: space-around;
 }
 
+/* ######################## */
+.dataLoading {
+	font-size: 1.5rem;
+	position: relative;
+	top: 20vh;
+	text-align: center;
+}
+
+.spinner {
+	font-size: 50px;
+	color: blue;
+}
+
 /* ############# responsive #################### */
 @media screen and (max-width: 600px) {
 	footer {

@@ -71,7 +71,7 @@ const repoUrl = "https://api.github.com/repos/";
 function getUrl() {
 	let query = `${username}/${reposName}/contents`;
 	let url = `${repoUrl}${query}`;
-	console.log("l'url est : ", url);
+	// console.log("l'url est : ", url);
 	return url
 }
 
@@ -81,14 +81,14 @@ function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 function getGithubData() {
-	filesBlock.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
+	filesBlock.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
 	fetch(getUrl())
 		.then(response => response.json())
 		.then(data => {
 			showAnswer(data)
 		})
 		.catch(error => {
-			console.log("l'erreur est : ", error);
+			// console.log("l'erreur est : ", error);
 			dataLoadError();
 		})
 }
@@ -99,7 +99,7 @@ function hr() {
 }
 function showAnswer(data) {
 	// countRepo = data.total_count
-	console.log("data :", data);
+	// console.log("data :", data);
 	// console.log("data items :", data.items);
 	// countResultFind()
 	document.querySelector(".dataLoading").remove()

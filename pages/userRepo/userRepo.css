@@ -80,7 +80,7 @@
 }
 
 .line {
-	margin: 43px 0 22px 0px;
+	margin: 20px 0 20px 0px;
 	padding: 0 0 0 0;
 }
 
@@ -163,6 +163,8 @@
 	color: #000000ba;
 	text-decoration: none;
 	margin: 0 15px 0 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .title:hover {
@@ -202,12 +204,12 @@
 	background: #c0c0c0;
 }
 
-.dataLoading {
+/* .dataLoading {
 	font-size: 1.5rem;
 	text-align: center;
 	width: fit-content;
 	margin: 0 auto;
-}
+} */
 
 .repoNotFind {
 	position: relative;

@@ -4,7 +4,7 @@ function getInputData() {
 }
 
 function submitHomePage(event) {
-	console.log("je soumet");
+	// console.log("je soumet");
 }
 function clickMagnify(event) {
 	window.location.href = `pages/repositorys/repositorys.html?search=${getInputData()}`

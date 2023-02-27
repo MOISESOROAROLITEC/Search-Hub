@@ -6,9 +6,9 @@ let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
 let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
 let formatEnd
-console.log(searchData);
-if (searchData == "")
-	console.log("ilest vid");
+// console.log(searchData);
+// if (searchData == "")
+// 	console.log("ilest vid");
 
 function formatPageNumber() {
 	let urlFormated
@@ -22,7 +22,7 @@ function formatPageNumber() {
 	}
 	// console.log("la page est 1 : ", page);
 	if ((resultPerPage * page) >= 1000) {
-		console.log("if sup");
+		// console.log("if sup");
 		page = (1000 / resultPerPage).toFixed();
 		formatEnd = page
 		let url = window.location.href;
@@ -220,7 +220,7 @@ function getGithubData() {
 	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`;
 	// console.log(`la queri composer est : ${searchUrl}?${query}`);
 	responseContent = document.querySelector(".responseContent")
-	responseContent.innerHTML = `<div class="dataLoading">Chargement des données ...</div>`;
+	responseContent.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
@@ -229,7 +229,7 @@ function getGithubData() {
 			showAnswer(data)
 		})
 		.catch((error) => {
-			console.log("l'erreur est :", error);
+			// console.log("l'erreur est :", error);
 			dataLoadError(!responseData ? null : "Erreur de traitement des données");
 		})
 }
