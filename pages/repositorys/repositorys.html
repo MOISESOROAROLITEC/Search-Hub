@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="./repositorys.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
 	<link rel="stylesheet" href="../../components/header/header.css">
 	<link rel="stylesheet" href="../../components/footer/footer.css">
 	<link rel="stylesheet" href="../../style.css">
@@ -16,13 +17,14 @@
 		<header>
 			<a href="../../index.html">
 				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_logo.svg"
-					alt="logo Search hub du header">
+					alt="logo Search hub du header" title="page d'accueil">
 			</a>
 			<div class="leftHeadItem headSearchBox">
-				<img class="headerSearchLogo" title="cliquer pour valider la récherche" src="../../src/blue_magnify.png"
-					alt="logo de recherche" onclick="clickMagnify(event)">
 				<form action="./repositorys.html" class="headFormInput" onsubmit="submitRepoPage(event)">
-					<input class="headerSearchInput" type="text" name="search">
+					<input required class="headerSearchInput" type="text" name="search">
+					<button type="submit" class="submitSearchButton" title="cliquer pour valider la récherche">
+						<i class="fa fa-search searchIcon" aria-hidden="true" title="cliquer pour valider la récherche"></i>
+					</button>
 				</form>
 			</div>
 		</header>

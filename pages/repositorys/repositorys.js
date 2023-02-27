@@ -6,7 +6,9 @@ let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
 let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
 let formatEnd
-// console.log(page);
+console.log(searchData);
+if (searchData == "")
+	console.log("ilest vid");
 
 function formatPageNumber() {
 	let urlFormated
@@ -19,7 +21,8 @@ function formatPageNumber() {
 		window.history.pushState(null, "lol", urlFormated);
 	}
 	// console.log("la page est 1 : ", page);
-	if ((resultPerPage * page) > 1000) {
+	if ((resultPerPage * page) >= 1000) {
+		console.log("if sup");
 		page = (1000 / resultPerPage).toFixed();
 		formatEnd = page
 		let url = window.location.href;
@@ -128,8 +131,8 @@ function pagination(num) {
 	// console.dir(select)
 	let paginationNbr = document.querySelector(".pagination")
 	let nbrPage = (countRepo / resultPerPage).toFixed()
-	// if (resultPerPage * nbrPage > 1000)
-	// 	nbrPage = (1000 / resultPerPage).toFixed()
+	if (resultPerPage * nbrPage > 1000)
+		nbrPage = (1000 / resultPerPage).toFixed()
 	// console.log("nbr de page est :", nbrPage);
 
 	let deb = Number(page) - 5;
@@ -225,8 +228,8 @@ function getGithubData() {
 			// console.log(responseData);
 			showAnswer(data)
 		})
-		.catch(error => {
-			// console.log("l'erreur est :", error);
+		.catch((error) => {
+			console.log("l'erreur est :", error);
 			dataLoadError(!responseData ? null : "Erreur de traitement des données");
 		})
 }

@@ -152,7 +152,7 @@ function getUserInfo() {
 	fetch(`${userInfoUrl}${username}`)
 		.then(response => response.json())
 		.then(data => {
-			console.log(data.length);
+			console.log(data);
 			// document.querySelector(".dataLoading").innerHTML = ""
 			userData = data.length
 			userBoxDoc.innerHTML = userBox(data);
