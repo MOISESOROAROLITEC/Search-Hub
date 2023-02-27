@@ -182,6 +182,7 @@ function getUserRepos() {
 		.catch(error => {
 			// document.querySelector(".paginationBox").innerHTML = "";
 			// dataLoadError(userData ? null : "aucun utilisateur ne correcpond a ce nom");
+			dataLoadError(userData ? null : `l'utilisateur '<span class="errorUsername" >${username}</span>' est introuvable`);
 			console.error("l'erreur est : ", error)
 		});
 }
