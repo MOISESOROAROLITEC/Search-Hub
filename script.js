@@ -28,3 +28,12 @@ function dataLoadError(message) {
 			`;
 	responsePage.innerHTML = returned;
 }
+function submitHeaderInput(event, url) {
+	console.log("l'event :", event, " URL : ", url);
+	event.preventDefault();
+	let inputValue = document.querySelector(".headerSearchInput").value.replace(/\s+/g, ' ').trim();
+	window.location.href = `${url}?search=${inputValue}`
+}
+// function putHeaderContent(){
+// 	let header = document.querySelector(".")
+// }

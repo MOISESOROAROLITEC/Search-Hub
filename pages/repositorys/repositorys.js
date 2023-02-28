@@ -83,10 +83,7 @@ function repositoryBlock(id, title, description,) {
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
-function clickMagnify(event) {
-	updatePage(headerSearchInput.value);
 
-}
 function repoBlockBottomInfos(language, licence, createdDate, updateDate) {
 	let dataReturned = "";
 	let lang = `
@@ -332,6 +329,7 @@ function showUsers(data) {
 			.then(response => response.json())
 			.then(data => {
 				// console.log("la seconde data est : ", data);
+
 				responseContent.innerHTML += userCard(data.avatar_url, data.name, data.login, data.bio)
 			})
 	})

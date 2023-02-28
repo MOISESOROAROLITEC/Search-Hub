@@ -14,10 +14,7 @@ function updatePage(search = "", page = "") {
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
-function clickMagnify(event) {
-	updatePage(document.querySelector(".headerSearchInput").value);
 
-}
 function repoNameBlock() {
 	return `
 		<img class="bookMark" src="../../src/doc/book_mark.png" alt="book_mark">

@@ -6,7 +6,7 @@ let header = `
 		<div class="leftHeadItem">
 			<div class="headSearchBox">
 				<img class="headerSearchLogo" title="cliquer pour valider la récherche" src="./src/blue_magnify.png"
-					alt="logo de recherche" onclick="clickMagnify(event)">
+					alt="logo de recherche">
 				<form class="headFormInput" onsubmit="submitHomePage(event)">
 					<input class="headerSearchInput" type="text" name="search" autofocus="true">
 				</form>

@@ -7,12 +7,10 @@ let userData = false;
 let userRepo = false;
 // console.log("nom : ", username, " resultPerpage : ", userResultPerPage, " page : ", page);
 
-// ############################# 0575256854
+// #############################
 let searchData = urlParams.get('search');
 let formatEnd
-// console.log(searchData);
-// if (searchData == "")
-// 	console.log("ilest vid");
+
 
 function formatPageNumber() {
 	let urlFormated
@@ -22,7 +20,7 @@ function formatPageNumber() {
 		let pos = url.indexOf("&")
 		// console.log("la position : ", pos);
 		urlFormated = url.slice(0, pos) + `&page=${page}`
-		window.history.pushState(null, "lol", urlFormated);
+		window.history.pushState(null, "", urlFormated);
 	}
 	// console.log("la page est 1 : ", page);
 	if ((userResultPerPage * page) >= 1000) {
@@ -148,9 +146,7 @@ function updatePage(page = "") {
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
-function clickMagnify(event) {
-	updatePage(document.querySelector(".headerSearchInput").value);
-}
+
 function userBox(data) {
 	// console.log("la data est : ", dshowuserata);
 	let name = data.name || "";
