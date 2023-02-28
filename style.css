@@ -8,7 +8,6 @@ body {
 	padding: 0;
 	/* background: #393939; */
 	/* background: white; */
-
 }
 
 div,
@@ -25,7 +24,7 @@ footer {
 	/* background: url("./src/view\ \(1\).jpeg"); */
 }
 
-/* ##################### Error ######################*/
+/* ############## Error message ############*/
 
 .dataLoadError {
 	position: relative;
@@ -73,7 +72,7 @@ footer {
 	justify-content: space-around;
 }
 
-/* ######################## */
+/* ######## Data loader ######### */
 .dataLoading {
 	font-size: 1.5rem;
 	position: relative;

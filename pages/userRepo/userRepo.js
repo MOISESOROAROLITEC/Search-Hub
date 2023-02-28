@@ -171,9 +171,9 @@ function userBox(data) {
 const userInfoUrl = "https://api.github.com/users/";
 const userRepos = `https://api.github.com/users/${username}/repos?per_page=${userResultPerPage}&page=${page}`
 
-function encodeSearchTerm(sentence) {
-	return encodeURIComponent(sentence)
-}
+// function encodeSearchTerm(sentence) {
+// 	return encodeURIComponent(sentence)
+// }
 function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
@@ -183,10 +183,6 @@ function countResultFind(event) {
 	switch (countRepo) {
 		case 0:
 			countResultFindDiv.innerHTML = "<div class='repoNotFind'>aucun repository trouvé 😔</div>"
-
-			break;
-		case undefined:
-			countResultFindDiv.innerHTML = "chargement des données ..."
 			break;
 		default:
 			countResultFindDiv.innerHTML = `${formatNumber(countRepo)} repository results`
@@ -194,10 +190,10 @@ function countResultFind(event) {
 	}
 }
 function dateLisible(date) {
-	// console.log("la date est : ", date);
 	let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	return new Date(date).toLocaleDateString('fr-FR', dateOptions)
 }
+
 function repositoryBlock(id, title, description, language, updateDate) {
 	return `
 		<div class="repoBlock" id="${id}">
@@ -221,31 +217,25 @@ function topicsChips(chip) {
 
 function getUserInfo() {
 	let userBoxDoc = document.querySelector(".userBox")
-	userBoxDoc.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
+	userBoxDoc.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données ...</div> </div></div>`;
 	fetch(`${userInfoUrl}${username}`)
 		.then(response => response.json())
 		.then(data => {
-
-			// console.log(data);
 			countRepo = data.public_repos
 			userData = data.length
 			userBoxDoc.innerHTML = userBox(data);
-			// if (page > (data.public_repos / userResultPerPage).toFixed())
-			// 	page = 1
 			getUserRepos()
-			// showAnswer(data)
+
 		})
 		.catch(error => {
-			// document.querySelector(".paginationBox").innerHTML = "";
 			dataLoadError(userData ? null : "aucun utilisateur ne correcpond a ce nom");
-			// document.querySelector(".retry").addEventListener("click", updatePage())
 			console.error("l'erreur est : ", error)
 		});
 }
 let repoBox = document.querySelector(".repoBox");
 function getUserRepos() {
 	// responsePage = document.querySelector(".responsePage")
-	repoBox.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
+	repoBox.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données ...</div> </div></div>`;
 
 	const userRepos = `https://api.github.com/users/${username}/repos?per_page=${userResultPerPage}&page=${page}`;
 	// console.log("la req est : ", userRepos);

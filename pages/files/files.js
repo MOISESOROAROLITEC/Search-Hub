@@ -81,7 +81,7 @@ function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 function getGithubData() {
-	filesBlock.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
+	filesBlock.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données...</div> </div></div>`;
 	fetch(getUrl())
 		.then(response => response.json())
 		.then(data => {

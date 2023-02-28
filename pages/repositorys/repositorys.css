@@ -35,13 +35,6 @@
 	font-size: 1.8rem;
 }
 
-/* .repoTitleBlock {
-	text-decoration: none;
-}
-
-.repoTitleBlock:hover {}
-
-*/
 .bottomInfo {
 	display: flex;
 	flex-wrap: wrap;
@@ -111,6 +104,33 @@
 
 .topicsChips:hover {
 	background: #c0c0c0;
+}
+
+/* ########## user search ############## */
+.userCard {
+	display: flex;
+	border-top: solid 1px #00000073;
+	padding: 5px 5px 5px 5px;
+	margin: 0 0 5px 0;
+}
+
+.userCard:hover {
+	background: #0000ff09;
+}
+
+.userAvatar {
+	width: 100px;
+}
+
+.userInfosBox {
+	margin: 10px;
+}
+
+.userLogin {
+	font-weight: 500;
+	font-size: 15px;
+	letter-spacing: 0px;
+	margin: 0px 0 10px 0;
 }
 
 /* ################ pagination ############### */

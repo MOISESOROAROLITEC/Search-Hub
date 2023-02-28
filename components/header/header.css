@@ -99,3 +99,47 @@ header {
 .headLogoBox {
 	cursor: pointer;
 }
+
+/* ############# type of search ############# */
+
+.searchBy {
+	display: grid;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.searchByButtons {
+	display: flex;
+}
+
+.sbButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 5px 5px;
+	border: solid 1px white;
+	padding: 1px 6px;
+	border-radius: 15px;
+	color: black;
+	font-weight: 600;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.sbButton:hover {
+	/* border: solid 2px white; */
+	padding: 1px 6px;
+	border-radius: 15px;
+	color: white;
+	font-weight: 700;
+}
+
+.searchType {
+	padding: 1px 6px;
+	border-radius: 15px;
+	color: white;
+	font-weight: 700;
+}

@@ -20,7 +20,14 @@
 				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_logo.svg"
 					alt="logo Search hub du header" title="page d'accueil">
 			</a>
-			<div class="leftHeadItem headSearchBox">
+			<div class="searchBy">
+				<div class="searcheByText">Rechercher par :</div>
+				<div class="searchByButtons">
+					<div class="sbButton searchRepo" onclick="changeChearchType('repo')">repositorie</div>
+					<div class="sbButton searchUsername" onclick="changeChearchType('username')">nom d'utilisateur</div>
+				</div>
+			</div>
+			<div class=" leftHeadItem headSearchBox">
 				<form action="./repositorys.html" class="headFormInput" onsubmit="submitRepoPage(event)">
 					<input required class="headerSearchInput" type="text" name="search">
 					<button type="submit" class="submitSearchButton" title="cliquer pour valider la récherche">
@@ -35,6 +42,7 @@
 		<div class="responsePage">
 			<div class="responseCount"></div>
 			<section class="responseContent">
+				<a href="../userRepo/userRepo.html"></a>
 			</section>
 			<div class="paginationBox">
 			</div>

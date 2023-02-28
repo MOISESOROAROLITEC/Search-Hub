@@ -1,41 +1,48 @@
 let responseData
 let countRepo
+let formatEnd
+
+let repobtn = document.querySelector(".searchRepo");
+let usernamebtn = document.querySelector(".searchUsername");
 let headerSearchInput = document.querySelector(".headerSearchInput");
+
 let urlParams = new URLSearchParams(window.location.search);
-let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
 let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
-let formatEnd
-// console.log(searchData);
-// if (searchData == "")
-// 	console.log("ilest vid");
+
+let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
+let searchType = localStorage.getItem("searchType") || "repo";
+
+
+// console.log(searchType);
+function onload() {
+	if (searchType == "repo") {
+		repobtn.classList.add("searchType");
+		usernamebtn.classList.remove("searchType");
+	} else {
+		usernamebtn.classList.add("searchType");
+		repobtn.classList.remove("searchType");
+	}
+}
+onload()
 
 function formatPageNumber() {
 	let urlFormated
+	let url = window.location.href;
+	let pos = url.indexOf("&")
 	if (isNaN(page)) {
 		page = 1
-		let url = window.location.href;
-		let pos = url.indexOf("&")
-		// console.log("la position : ", pos);
 		urlFormated = url.slice(0, pos) + `&page=${page}`
-		window.history.pushState(null, "lol", urlFormated);
+		window.history.pushState(null, "", urlFormated);
 	}
-	// console.log("la page est 1 : ", page);
 	if ((resultPerPage * page) >= 1000) {
-		// console.log("if sup");
 		page = (1000 / resultPerPage).toFixed();
 		formatEnd = page
-		let url = window.location.href;
-		let pos = url.indexOf("&")
-		// console.log("la position : ", pos);
 		urlFormated = url.slice(0, pos) + `&page=${page}`
-		window.history.pushState(null, "lol", urlFormated);
+		window.history.pushState(null, "", urlFormated);
 	}
-	// console.log("la page est : ", page);
-	// console.log("l'ur est : ", urlFormated);
 }
 formatPageNumber()
-
 
 function updatePage(search = "", page = "") {
 	if (!search)
@@ -77,7 +84,7 @@ function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
 function clickMagnify(event) {
-	updatePage(document.querySelector(".headerSearchInput").value);
+	updatePage(headerSearchInput.value);
 
 }
 function repoBlockBottomInfos(language, licence, createdDate, updateDate) {
@@ -186,6 +193,21 @@ function pagination(num) {
 	}
 }
 
+function changeChearchType(type) {
+	if (localStorage.getItem("searchType") == type)
+		return
+	if (type == "repo") {
+		repobtn.classList.add("searchType");
+		usernamebtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		updatePage()
+	} else {
+		usernamebtn.classList.add("searchType");
+		repobtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		updatePage()
+	}
+}
 
 const token = "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";
 const searchUrl = "https://api.github.com/search/repositories";
@@ -215,12 +237,21 @@ function countResultFind(event) {
 			break;
 	}
 }
-
-function getGithubData() {
+function dataLoading() {
+	return `
+		<div class="dataLoading">
+			<div>
+				<i class="fas fa-circle-notch fa-spin spinner"></i>
+				<div class="dataLoadText">Chargement des données ...</div>
+			</div>
+		</div>
+	`;
+}
+function Repositories() {
 	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`;
 	// console.log(`la queri composer est : ${searchUrl}?${query}`);
 	responseContent = document.querySelector(".responseContent")
-	responseContent.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données 🔁 ...</div> </div></div>`;
+	responseContent.innerHTML = dataLoading()
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
@@ -235,8 +266,6 @@ function getGithubData() {
 }
 function showAnswer(data) {
 	countRepo = data.total_count
-	// console.log("data :", data);
-	// console.log("data items :", data.items);
 	countResultFind()
 	document.querySelector(".dataLoading").remove()
 	data.items.forEach(item => {
@@ -256,10 +285,66 @@ function showAnswer(data) {
 		pagination(countRepo)
 	}
 }
+function Users() {
+	let usersUrl = `https://api.github.com/search/users?q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`
+	fetch(usersUrl)
+		.then(response => response.json())
+		.then(data => {
+			// responseData = data?.items
+			countRepo = data.total_count
+			// console.log(data);
+			showUsers(data.items)
+			// showAnswer(data)
+		})
+		.catch((error) => {
+			// console.log("l'erreur est :", error);
+			dataLoadError(!responseData ? null : "Erreur de traitement des données");
+		})
+}
+
+function userCard(imgUrl, username, login, bio = "") {
+	if (bio.length >= 200) {
+		// console.log(bio);
+		bio = bio.slice(0, 200) + " ..."
+	}
+	// console.log("le login est : ", login);
+	if (!login)
+		return "";
+	return `
+		<div class="userCard">
+			<a href="../userRepo/userRepo.html?username=${login}" title="cliquer pour voir les repositories de ${login}">
+				<img src="${imgUrl}" class="userAvatar">
+			</a>
+			<div class="userInfosBox">
+				<a class="title" href="../userRepo/userRepo.html?username=${login}" title="cliquer pour voir les repositories de ${login}">
+					<div class="userName"> ${username || login} </div>
+				</a>
+				<div class="userLogin"> ${login || ""} </div>
+				<div class="userBio"> ${bio || ""} </div>
+			</div>
+		</div>
+	`;
+}
+
+function showUsers(data) {
+	data.forEach(el => {
+		fetch(el.url)
+			.then(response => response.json())
+			.then(data => {
+				// console.log("la seconde data est : ", data);
+				responseContent.innerHTML += userCard(data.avatar_url, data.name, data.login, data.bio)
+			})
+	})
+}
 
 function showResponsePage() {
 	document.querySelector(".responseCount").style.color = "#1122ff"
 	headerSearchInput.value = searchData;
-	getGithubData()
+	// console.log(searchType);
+	if (searchType == "repo") {
+		Repositories();
+	} else {
+		Users();
+	}
 }
 showResponsePage();
