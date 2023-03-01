@@ -106,7 +106,6 @@
 	background: #c0c0c0;
 }
 
-/* ########## user search ############## */
 .userCard {
 	display: flex;
 	border-top: solid 1px #00000073;
@@ -132,8 +131,6 @@
 	letter-spacing: 0px;
 	margin: 0px 0 10px 0;
 }
-
-/* ################ pagination ############### */
 
 @media screen and (max-width: 700px) {
 	.responsePage {

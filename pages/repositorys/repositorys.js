@@ -13,8 +13,6 @@ let searchData = urlParams.get('search');
 let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
 let searchType = localStorage.getItem("searchType") || "repo";
 
-
-// console.log(searchType);
 function onload() {
 	if (searchType == "repo") {
 		repobtn.classList.add("searchType");
@@ -64,7 +62,6 @@ function pagineRight() {
 		updatePage("", Number(page) + 1)
 }
 function goPage(number) {
-	// localStorage.setItem("page", number);
 	updatePage("", number);
 }
 function repositoryBlock(id, title, description,) {
@@ -125,19 +122,16 @@ function pagination(num) {
 	document.querySelector(".paginationBox").innerHTML = paginationBlock;
 	let select = document.querySelector(".repoPagination");
 	[10, 30, 50, 75, 100].forEach(nbr => {
-		// console.log("je suis dans la boucle for de range");
 		if (nbr == resultPerPage) {
 			select.innerHTML += option(nbr, "selected")
 		} else {
 			select.innerHTML += option(nbr)
 		}
 	});
-	// console.dir(select)
 	let paginationNbr = document.querySelector(".pagination")
 	let nbrPage = (countRepo / resultPerPage).toFixed()
 	if (resultPerPage * nbrPage > 1000)
 		nbrPage = (1000 / resultPerPage).toFixed()
-	// console.log("nbr de page est :", nbrPage);
 
 	let deb = Number(page) - 5;
 	if (deb < 1)
@@ -155,18 +149,11 @@ function pagination(num) {
 			fin = 10;
 		else {
 			fin = nbrPage;
-			// deb = page - 10
 		}
 	if (formatEnd) {
 		fin = formatEnd
-		// console.log("fend");
 	}
-
-	// console.log("le debut est : ", deb);
-	// console.log("le fin est : ", fin);
-
 	for (let i = deb; i <= fin; i++) {
-		// console.log("je suis dans la boucle for i i++");
 		if (i == page) {
 			paginationNbr.innerHTML += `<div class="pagSpace activePage" >${i}</div> `
 		} else {
@@ -219,7 +206,6 @@ function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 function countResultFind(event) {
-	// console.log(countRepo);
 	let countResultFindDiv = document.querySelector(".responseCount")
 	switch (countRepo) {
 		case 0:
@@ -246,18 +232,15 @@ function dataLoading() {
 }
 function Repositories() {
 	let query = `q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`;
-	// console.log(`la queri composer est : ${searchUrl}?${query}`);
 	responseContent = document.querySelector(".responseContent")
 	responseContent.innerHTML = dataLoading()
 	fetch(`${searchUrl}?${query}`)
 		.then(response => response.json())
 		.then(data => {
 			responseData = data?.items
-			// console.log(responseData);
 			showAnswer(data)
 		})
 		.catch((error) => {
-			// console.log("l'erreur est :", error);
 			dataLoadError(!responseData ? null : "Erreur de traitement des données");
 		})
 }
@@ -287,24 +270,18 @@ function Users() {
 	fetch(usersUrl)
 		.then(response => response.json())
 		.then(data => {
-			// responseData = data?.items
 			countRepo = data.total_count
-			// console.log(data);
 			showUsers(data.items)
-			// showAnswer(data)
 		})
 		.catch((error) => {
-			// console.log("l'erreur est :", error);
 			dataLoadError(!responseData ? null : "Erreur de traitement des données");
 		})
 }
 
 function userCard(imgUrl, username, login, bio = "") {
 	if (bio.length >= 200) {
-		// console.log(bio);
 		bio = bio.slice(0, 200) + " ..."
 	}
-	// console.log("le login est : ", login);
 	if (!login)
 		return "";
 	return `
@@ -328,17 +305,18 @@ function showUsers(data) {
 		fetch(el.url)
 			.then(response => response.json())
 			.then(data => {
-				// console.log("la seconde data est : ", data);
 
 				responseContent.innerHTML += userCard(data.avatar_url, data.name, data.login, data.bio)
 			})
-	})
+	});
+	if (countRepo) {
+		pagination(countRepo)
+	}
 }
 
 function showResponsePage() {
 	document.querySelector(".responseCount").style.color = "#1122ff"
 	headerSearchInput.value = searchData;
-	// console.log(searchType);
 	if (searchType == "repo") {
 		Repositories();
 	} else {

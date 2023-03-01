@@ -2,8 +2,6 @@
 	position: absolute;
 	width: 100%;
 	top: calc(50vh - 150px);
-	/* border: solid 1px black; */
-
 }
 
 .homeBlueLogo {
@@ -77,14 +75,6 @@
 	font-size: 45px;
 	margin: -4px 0 0 -4px;
 }
-
-/* .searchLogoMagnify {
-	color: #0E68EE;
-	width: 10px;
-	height: 10px;
-	margin: 0;
-	padding: 0;
-} */
 
 .infoText {
 	text-align: center;

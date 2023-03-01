@@ -4,8 +4,6 @@ let username = urlParams.get("username");
 let reposName = urlParams.get("repo");
 
 function updatePage(search = "", page = "") {
-	// if (!search)
-	// 	search = searchData;
 	if (page)
 		page = `&page=${page}`;
 	window.location.href = `../repositorys/repositorys.html?search=${search}` + page
@@ -63,12 +61,10 @@ function fileBlock(name, type, size = "") {
 }
 
 const repoUrl = "https://api.github.com/repos/";
-// const searchUrlUser = "https://api.github.com/users/repos";
 
 function getUrl() {
 	let query = `${username}/${reposName}/contents`;
 	let url = `${repoUrl}${query}`;
-	// console.log("l'url est : ", url);
 	return url
 }
 
@@ -85,7 +81,6 @@ function getGithubData() {
 			showAnswer(data)
 		})
 		.catch(error => {
-			// console.log("l'erreur est : ", error);
 			dataLoadError();
 		})
 }
@@ -95,28 +90,22 @@ function hr() {
 	`
 }
 function showAnswer(data) {
-	// countRepo = data.total_count
-	// console.log("data :", data);
-	// console.log("data items :", data.items);
-	// countResultFind()
+
 	document.querySelector(".dataLoading").remove()
 	filesBlock.innerHTML = userBlock()
 	if (!data.length) {
-		// console.log("le repo est vide");
 		document.querySelector(".filesBlock").innerHTML += hr() + `<div class="fileBlock" style="text-align: center; display: block;">Ce repositorie est vide</div>`
 	} else {
 		let dir = data.filter(el => el.type == "dir");
 		let file = data.filter(el => el.type == "file");
 		let dataSorted = [...dir, ...file]
 		dataSorted.forEach((item) => {
-			// console.log("les data sont :", index);
 			filesBlock.innerHTML += hr() + fileBlock(item.name, item.type, item.size);
 		})
 	}
 }
 
 function showResponsePage() {
-	// console.log("show rep");
 	getGithubData()
 }
 showResponsePage();

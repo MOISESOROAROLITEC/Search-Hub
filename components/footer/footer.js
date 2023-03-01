@@ -5,4 +5,3 @@ let footer = `
 	`;
 const footerBalise = document.querySelector("footer");
 footerBalise.innerHTML = footer
-// console.log("footer dans footer is : ", footerBalise);

@@ -4,7 +4,6 @@ function showHomePage(params) {
 }
 
 function dateLisible(date) {
-	// console.log("la date est : ", date);
 	let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	return new Date(date).toLocaleDateString('fr-FR', dateOptions)
 }
@@ -34,6 +33,3 @@ function submitHeaderInput(event, url) {
 	let inputValue = document.querySelector(".headerSearchInput").value.replace(/\s+/g, ' ').trim();
 	window.location.href = `${url}?search=${inputValue}`
 }
-// function putHeaderContent(){
-// 	let header = document.querySelector(".")
-// }

@@ -5,9 +5,7 @@ let userResultPerPage = Number(localStorage.getItem("userResultPerPage")) || 30;
 let page = urlParams.get("page") || 1;
 let userData = false;
 let userRepo = false;
-// console.log("nom : ", username, " resultPerpage : ", userResultPerPage, " page : ", page);
 
-// #############################
 let searchData = urlParams.get('search');
 let formatEnd
 
@@ -18,28 +16,21 @@ function formatPageNumber() {
 		page = 1
 		let url = window.location.href;
 		let pos = url.indexOf("&")
-		// console.log("la position : ", pos);
 		urlFormated = url.slice(0, pos) + `&page=${page}`
 		window.history.pushState(null, "", urlFormated);
 	}
-	// console.log("la page est 1 : ", page);
 	if ((userResultPerPage * page) >= 1000) {
-		// console.log("if sup");
 		page = (1000 / userResultPerPage).toFixed();
 		formatEnd = page
 		let url = window.location.href;
 		let pos = url.indexOf("&")
-		// console.log("la position : ", pos);
 		urlFormated = url.slice(0, pos) + `&page=${page}`
 		window.history.pushState(null, "lol", urlFormated);
 	}
-	// console.log("la page est : ", page);
-	// console.log("l'ur est : ", urlFormated);
 }
 formatPageNumber()
 
 function updateresultPerPage(event) {
-	// console.log(event.target.value);
 	localStorage.setItem("userResultPerPage", event.target.value)
 	updatePage()
 }
@@ -52,7 +43,6 @@ function pagineRight() {
 		updatePage(Number(page) + 1)
 }
 function goPage(number) {
-	// localStorage.setItem("page", number);
 	updatePage(number);
 }
 
@@ -74,20 +64,16 @@ function pagination(num) {
 	document.querySelector(".paginationBox").innerHTML = paginationBlock;
 	let select = document.querySelector(".repoPagination");
 	[10, 30, 50, 75, 100].forEach(nbr => {
-		// console.log("je suis dans la boucle for de range");
 		if (nbr == userResultPerPage) {
 			select.innerHTML += option(nbr, "selected")
 		} else {
 			select.innerHTML += option(nbr)
 		}
 	});
-	// console.dir(select)
 	let paginationNbr = document.querySelector(".pagination")
 	let nbrPage = (countRepo / userResultPerPage).toFixed()
 	if (userResultPerPage * nbrPage > 1000)
 		nbrPage = (1000 / userResultPerPage).toFixed()
-	// console.log("nbr de page est :", nbrPage);
-
 	let deb = Number(page) - 5;
 	if (deb < 1)
 		deb = 1;
@@ -108,12 +94,7 @@ function pagination(num) {
 	if (formatEnd) {
 		fin = formatEnd
 	}
-
-	// console.log("le debut est : ", deb);
-	// console.log("le fin est : ", fin);
-
 	for (let i = deb; i <= fin; i++) {
-		// console.log("je suis dans la boucle for i i++");
 		if (i == page) {
 			paginationNbr.innerHTML += `<div class="pagSpace activePage" >${i}</div> `
 		} else {
@@ -141,14 +122,12 @@ function updatePage(page = "") {
 		page = `&page=${page}`;
 	window.location.href = `userRepo.html?username=${username}` + page
 }
-// #############################
 
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
 
 function userBox(data) {
-	// console.log("la data est : ", dshowuserata);
 	let name = data.name || "";
 	let bio = data.bio || "";
 	return `
@@ -163,18 +142,12 @@ function userBox(data) {
 		<div class="bioBox">${bio}</div>
 	`
 }
-// const token = "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";
 const userInfoUrl = "https://api.github.com/users/";
-const userRepos = `https://api.github.com/users/${username}/repos?per_page=${userResultPerPage}&page=${page}`
 
-// function encodeSearchTerm(sentence) {
-// 	return encodeURIComponent(sentence)
-// }
 function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 function countResultFind(event) {
-	// console.log(countRepo);
 	let countResultFindDiv = document.querySelector(".responseCount")
 	switch (countRepo) {
 		case 0:
@@ -207,6 +180,7 @@ function repositoryBlock(id, title, description, language, updateDate) {
 			<div class="topics"></div>
 		</div>
 `}
+
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
@@ -230,28 +204,23 @@ function getUserInfo() {
 }
 let repoBox = document.querySelector(".repoBox");
 function getUserRepos() {
-	// responsePage = document.querySelector(".responsePage")
 	repoBox.innerHTML = `<div class="dataLoading"><div><i class="fas fa-circle-notch fa-spin spinner"></i> <div class="dataLoadText">Chargement des données ...</div> </div></div>`;
 
 	const userRepos = `https://api.github.com/users/${username}/repos?per_page=${userResultPerPage}&page=${page}`;
-	// console.log("la req est : ", userRepos);
 	fetch(userRepos)
 		.then(response => response.json())
 		.then(data => {
-			// console.log("la reponse est : ", data);
 			repoBox.innerHTML = ""
 			userRepo = data;
 			showUserRepos(data);
 		})
 		.catch(error => {
-			// document.querySelector(".paginationBox").innerHTML = "";
 			console.error("l'erreur est : ", error);
 			dataLoadError(userData ? null : `l'utilisateur '<span class="errorUsername" >${username}</span>' est introuvable`);
 		});
 }
 
 function showUserRepos(data) {
-	// console.log("data :", data.length);
 	if (data.length == 0) {
 		document.querySelector(".repoBox").innerHTML += `<div class="emptyRepo">Ce utilisateur n'a pas de repositorie</div>`
 	} else {
