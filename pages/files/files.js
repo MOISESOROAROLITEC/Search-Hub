@@ -12,6 +12,21 @@ function updatePage(search = "", page = "") {
 function topicsChips(chip) {
 	return `<div class="topicsChips" >${chip}</div>`
 }
+function changeChearchType(type) {
+	if (localStorage.getItem("searchType") == type)
+		return
+	if (type == "repo") {
+		repobtn.classList.add("searchType");
+		usernamebtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		// updatePage()
+	} else {
+		usernamebtn.classList.add("searchType");
+		repobtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		// updatePage()
+	}
+}
 
 function repoNameBlock() {
 	return `

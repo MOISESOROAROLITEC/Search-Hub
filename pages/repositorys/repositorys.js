@@ -2,8 +2,6 @@ let responseData
 let countRepo
 let formatEnd
 
-let repobtn = document.querySelector(".searchRepo");
-let usernamebtn = document.querySelector(".searchUsername");
 let headerSearchInput = document.querySelector(".headerSearchInput");
 
 let urlParams = new URLSearchParams(window.location.search);
@@ -11,18 +9,6 @@ let page = urlParams.get("page") || 1;
 let searchData = urlParams.get('search');
 
 let resultPerPage = Number(localStorage.getItem("resultPerPage")) || 30;
-let searchType = localStorage.getItem("searchType") || "repo";
-
-function onload() {
-	if (searchType == "repo") {
-		repobtn.classList.add("searchType");
-		usernamebtn.classList.remove("searchType");
-	} else {
-		usernamebtn.classList.add("searchType");
-		repobtn.classList.remove("searchType");
-	}
-}
-onload()
 
 function formatPageNumber() {
 	let urlFormated
@@ -177,22 +163,6 @@ function pagination(num) {
 	}
 }
 
-function changeChearchType(type) {
-	if (localStorage.getItem("searchType") == type)
-		return
-	if (type == "repo") {
-		repobtn.classList.add("searchType");
-		usernamebtn.classList.remove("searchType");
-		localStorage.setItem("searchType", type);
-		updatePage()
-	} else {
-		usernamebtn.classList.add("searchType");
-		repobtn.classList.remove("searchType");
-		localStorage.setItem("searchType", type);
-		updatePage()
-	}
-}
-
 const token = "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";
 const searchUrl = "https://api.github.com/search/repositories";
 
@@ -266,6 +236,7 @@ function showAnswer(data) {
 	}
 }
 function Users() {
+	responseContent.innerHTML = dataLoading()
 	let usersUrl = `https://api.github.com/search/users?q=${encodeSearchTerm(searchData)}&per_page=${resultPerPage}&page=${page}&sort=best-match`
 	fetch(usersUrl)
 		.then(response => response.json())
@@ -279,7 +250,7 @@ function Users() {
 }
 
 function userCard(imgUrl, username, login, bio = "") {
-	if (bio.length >= 200) {
+	if (bio?.length >= 200) {
 		bio = bio.slice(0, 200) + " ..."
 	}
 	if (!login)
@@ -301,15 +272,17 @@ function userCard(imgUrl, username, login, bio = "") {
 }
 
 function showUsers(data) {
+	let requesteDoWithSucces
+	document.querySelector(".dataLoading").remove()
 	data.forEach(el => {
 		fetch(el.url)
 			.then(response => response.json())
 			.then(data => {
-
 				responseContent.innerHTML += userCard(data.avatar_url, data.name, data.login, data.bio)
+				requesteDoWithSucces = true;
 			})
 	});
-	if (countRepo) {
+	if (requesteDoWithSucces) {
 		pagination(countRepo)
 	}
 }

@@ -25,7 +25,13 @@
 							<i class="fa fa-search searchIcon" aria-hidden="true" title="cliquer pour valider la récherche"></i>
 						</button>
 					</form>
-
+				</div>
+				<div class="homeSearchBy">
+					<div class="homeSearcheByText">Rechercher par :</div>
+					<div class="homeSearchByButtons">
+						<div class="homeSbButton searchRepo" onclick="homeChangeChearchType('repo')">repositorie</div>
+						<div class="homeSbButton searchUsername" onclick="homeChangeChearchType('username')">nom d'utilisateur</div>
+					</div>
 				</div>
 				<div class="infoText">
 					Utilisateurs Github, les repositories Github et la recherche de code.
@@ -42,8 +48,7 @@
 	</div>
 
 </body>
-<!-- <script src="./components/footer/footer.js"></script> -->
-<script src="./pages/home/home.js"></script>
 <script src="./script.js"></script>
+<script src="./pages/home/home.js"></script>
 
 </html>

@@ -20,6 +20,13 @@
 				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_logo.svg"
 					alt="logo Search hub du header">
 			</a>
+			<div class="searchBy">
+				<div class="searcheByText">Rechercher par :</div>
+				<div class="searchByButtons">
+					<div class="sbButton searchRepo" onclick="changeChearchType('repo')">repositorie</div>
+					<div class="sbButton searchUsername" onclick="changeChearchType('username')">nom d'utilisateur</div>
+				</div>
+			</div>
 			<div class="leftHeadItem headSearchBox">
 				<form class="headFormInput" onsubmit="submitHeaderInput(event, '../repositorys/repositorys.html')">
 					<input class="headerSearchInput" type="text" name="search">

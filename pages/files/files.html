@@ -19,6 +19,13 @@
 				<img class="headLogoBox headWhiteLogo" onclick="goHomePage(event)" src="../../src/doc/white_logo.svg"
 					alt="logo Search hub du header">
 			</a>
+			<div class="searchBy">
+				<div class="searcheByText">Rechercher par :</div>
+				<div class="searchByButtons">
+					<div class="sbButton searchRepo" onclick="changeChearchType('repo')">repositorie</div>
+					<div class="sbButton searchUsername" onclick="changeChearchType('username')">nom d'utilisateur</div>
+				</div>
+			</div>
 			<div class="leftHeadItem headSearchBox">
 				<img class="headerSearchLogo" title="cliquer pour valider la récherche" src="../../src/blue_magnify.png"
 					alt="logo de recherche">
@@ -31,9 +38,6 @@
 			</div>
 		</header>
 	</section>
-	<!-- <hr style="width: 50%; height: 5px;"> -->
-	<!-- <img class="bookMark" src="../../src/doc/book_mark.png" alt="book_mark"> -->
-
 	<section class="bodyContent">
 		<div class="responsePage">
 			<div class="repoNameBlock">
@@ -53,9 +57,6 @@
 	</div>
 </body>
 <script src="./files.js"></script>
-<!-- <script src="../../components/footer/footer.js"></script> -->
-<!-- <script src="../../components/header/header.js"></script> -->
-<!-- <script src="../homePage/home.js"></script> -->
 <script src="../../script.js"></script>
 
 </html>

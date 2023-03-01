@@ -1,3 +1,7 @@
+let repobtn = document.querySelector(".searchRepo");
+let usernamebtn = document.querySelector(".searchUsername");
+let searchType = localStorage.getItem("searchType") || "repo";
+
 function showHomePage(params) {
 	let bodyContent = document.querySelector(".bodyContent")
 	bodyContent.innerHTML = homePage
@@ -33,3 +37,30 @@ function submitHeaderInput(event, url) {
 	let inputValue = document.querySelector(".headerSearchInput").value.replace(/\s+/g, ' ').trim();
 	window.location.href = `${url}?search=${inputValue}`
 }
+function colorSearchButtonType() {
+	if (searchType == "repo") {
+		repobtn.classList.add("searchType");
+		usernamebtn.classList.remove("searchType");
+	} else {
+		usernamebtn.classList.add("searchType");
+		repobtn.classList.remove("searchType");
+	}
+}
+function changeChearchType(type, page = "") {
+	if (localStorage.getItem("searchType") == type)
+		return
+	if (type == "repo") {
+		repobtn.classList.add("searchType");
+		usernamebtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		if (page == "repositoriesPage")
+			updatePage()
+	} else {
+		usernamebtn.classList.add("searchType");
+		repobtn.classList.remove("searchType");
+		localStorage.setItem("searchType", type);
+		if (page == "repositoriesPage")
+			updatePage()
+	}
+}
+colorSearchButtonType()
